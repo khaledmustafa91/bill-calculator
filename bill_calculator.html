@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bill Calculator</h1>
+    <label for="hourRate">Hourly Rate:</label>
+    <input type="number" id="hourRate" placeholder="Enter hourly rate" required>
+
+    <label for="hoursWorked">Hours Worked:</label>
+    <input type="number" id="hoursWorked" placeholder="Enter hours worked" required>
+
+    <label for="minutesWorked">Minutes Worked:</label>
+    <input type="number" id="minutesWorked" placeholder="Enter minutes worked" required>
+
+    <button onclick="calculateBill()">Calculate Bill</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function calculateBill() {
+            const hourlyRate = parseFloat(document.getElementById('hourRate').value);
+            const hoursWorked = parseFloat(document.getElementById('hoursWorked').value);
+            const minutesWorked = parseFloat(document.getElementById('minutesWorked').value);
+
+            if (isNaN(hourlyRate) || isNaN(hoursWorked) || isNaN(minutesWorked)) {
+                document.getElementById('result').innerText = "Please enter valid numbers.";
+                return;
+            }
+
+            const totalMinutesWorked = (hoursWorked * 60) + minutesWorked;
+            const totalHoursWorked = totalMinutesWorked / 60;
+            const totalBill = hourlyRate * totalHoursWorked;
+
+            document.getElementById('result').innerText = `Total Bill: $${totalBill.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
